@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D²PPO: Diffusion Policy Policy Optimization with Dispersive Loss</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">D²PPO</h1>
+                <p class="subtitle">Diffusion Policy Policy Optimization with Dispersive Loss</p>
+                <div class="author-info">
+                    <p class="authors">Anonymous Submission</p>
+                    <p class="affiliation">Afiliations left empty for anonymous submission</p>
+                </div>
+                <div class="links">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-file-pdf"></i> Paper
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-video"></i> Video
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Abstract -->
+        <section class="section">
+            <div class="content">
+                <h2>Abstract</h2>
+                <p class="abstract">
+                    Diffusion policies excel at robotic manipulation by naturally modeling multimodal action distributions in high-dimensional spaces. Nevertheless, diffusion policies suffer from <strong>diffusion representation collapse</strong>: semantically similar observations are mapped to indistinguishable features, ultimately impairing their ability to handle subtle but critical variations required for complex robotic manipulation. To address this problem, we propose <strong>D²PPO (Diffusion Policy Policy Optimization with Dispersive Loss)</strong>. D²PPO introduces dispersive loss regularization that combats representation collapse by treating all hidden representations within each batch as negative pairs. D²PPO compels the network to learn discriminative representations of similar observations, thereby enabling the policy to identify subtle yet crucial differences necessary for precise manipulation. On RoboMimic benchmarks, D²PPO achieves an average improvement of <strong>22.7%</strong> in pre-training and <strong>26.1%</strong> after fine-tuning, setting new SOTA results. Real-world experiments on Franka Emika Panda robot validate the practicality of our method.
+                </p>
+            </div>
+        </section>
+
+        <!-- Method Overview -->
+        <section class="section">
+            <div class="content">
+                <h2>Method Overview</h2>
+                <div class="method-overview-full">
+                    <div class="method-figure">
+                        <img src="images/D2PPO.png" alt="D²PPO Method Overview" class="overview-img">
+                        <div class="figure-caption">
+                            <p><strong>Figure 1:</strong> D²PPO Framework Overview. The complete two-stage training paradigm: <strong>Left:</strong> Pre-training stage with Vision Transformer (ViT) feature extraction and dispersive loss regularization to prevent representation collapse; <strong>Top-right:</strong> Action diffusion process showing iterative denoising from Gaussian noise to final actions; <strong>Bottom-right:</strong> Fine-tuning stage with policy gradient optimization using two-layer MDP formulation for environment interaction.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="robomimic-tasks">
+                        <h3>Robomimic Manipulation Tasks</h3>
+                        <div class="tasks-figure">
+                            <img src="images/Diffusion_representation_collapse.png" alt="Diffusion Representation Collapse" class="tasks-img">
+                            <div class="figure-caption">
+                                <p><strong>Figure 2:</strong> Diffusion Representation Collapse Problem and Solution.
+                                (a) Similar observations in robotic manipulation scenarios can lead to different outcomes - correct grasping (green) vs. incorrect grasping (red) that results in task failure. 
+                                (b) Without dispersive loss: features cluster together, leading to representation collapse where similar observations are mapped to nearly identical representations.
+                                (c) With dispersive loss: features are well-distributed in the representation space, enabling the model to distinguish subtle but critical differences between similar observations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section">
+            <div class="content">
+                <h2>Key Features</h2>
+                <div class="features-grid-compact">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Dispersive Loss Regularization</h3>
+                            <p>"Contrastive learning without positive pairs" that spreads representations in hidden space, requiring no additional parameters.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Two-Stage Training</h3>
+                            <p>Pre-training with dispersive loss for representation diversity, then policy gradient fine-tuning for optimal performance.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Policy Gradient Integration</h3>
+                            <p>Novel gradient computation through iterative denoising, enabling effective RL with significant performance improvements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pre-training Results -->
+        <section class="section">
+            <div class="content">
+                <!-- Main Results Figure -->
+                <div class="result-figure">
+                    <h3>D²PPO Pre-training Performance Analysis</h3>
+                    <div class="figure-container">
+                        <img src="images/comprehensive_four_subplots.png" alt="D²PPO Pre-training Results" class="result-image">
+                        <div class="figure-caption">
+                            <p><strong>Figure 3:</strong> Comprehensive pre-training experimental results using D²PPO with dispersive loss across four robotic manipulation tasks. (a) Performance comparison showing baseline (DPPO) versus D²PPO success rates with error bars, demonstrating consistent improvements across all tasks. (b) Distribution of improvement rates across five dispersive loss variants. (c) Task difficulty correlation analysis showing the relationship between log-normalized task complexity and maximum improvement rates. (d) Method suitability matrix heatmap displaying improvement percentages for each dispersive loss variant across tasks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fine-tuning Results -->
+        <section class="section">
+            <div class="content">
+                <div class="result-figure">
+                    <h3>Policy Gradient Fine-tuning Performance</h3>
+                    <div class="figure-container">
+                        <img src="images/robomimic_ft_result_with_errorbands_row.png" alt="D²PPO Fine-tuning Results" class="result-image">
+                        <div class="figure-caption">
+                            <p><strong>Figure 4:</strong> Policy gradient fine-tuning results across four robotic manipulation tasks. The learning curves demonstrate that D²PPO consistently achieves superior sample efficiency and final performance compared to baseline DPPO and Gaussian policies, with enhanced representations translating into superior reinforcement learning performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulation Results -->
+        <section class="section">
+            <div class="content">
+                <h2>Simulation Results</h2>
+                <div class="simulation-results">
+                    <h3>D²PPO Performance on Robomimic Tasks</h3>
+                    <div class="videos-grid">
+                        <div class="video-card">
+                            <h4>Lift Task</h4>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/simulation/task_lift.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-description">
+                                Basic object manipulation task
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <h4>Can Task</h4>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/simulation/task_can.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-description">
+                                Cylindrical object grasping task
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <h4>Square Task</h4>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/simulation/task_square.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-description">
+                                Precise peg-in-hole placement task
+                            </div>
+                        </div>
+                        <div class="video-card">
+                            <h4>Transport Task</h4>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/simulation/task_transport.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-description">
+                                Multi-object coordination task
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real Robot Experiments -->
+        <section class="section">
+            <div class="content">
+                <h2>Real Robot Validation</h2>
+                <div class="real-robot-results">
+                    <h3>Franka Panda Arm Experiments</h3>
+                    <p>Real robot validation on a Franka Panda arm confirms the practical effectiveness of our approach.</p>
+                    
+                    <div class="real-robot-videos">
+                        <div class="video-card success">
+                            <h5>Lift Success</h5>
+                            <div class="method-label">with Dispersive Loss</div>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/real_robot/lift_success.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="video-card success">
+                            <h5>Square Success</h5>
+                            <div class="method-label">with Dispersive Loss</div>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/real_robot/square_success.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="video-card failure">
+                            <h5>Square Fail</h5>
+                            <div class="method-label">without Dispersive Loss</div>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/real_robot/square_fail.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="video-card success">
+                            <h5>Can Success</h5>
+                            <div class="method-label">with Dispersive Loss</div>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/real_robot/can_success.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="video-card success">
+                            <h5>Transport Success</h5>
+                            <div class="method-label">with Dispersive Loss</div>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/real_robot/transport_success.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="video-card failure">
+                            <h5>Transport Fail</h5>
+                            <div class="method-label">without Dispersive Loss</div>
+                            <div class="video-container">
+                                <video controls muted loop>
+                                    <source src="images/real_robot/transport_fail.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="section">
+            <div class="content">
+                <h2>Experimental Results</h2>
+                
+                <!-- Key Metrics -->
+                <div class="simple-metrics">
+                    <span class="metric"><strong>+22.7%</strong> Pre-training Improvement</span> • 
+                    <span class="metric"><strong>+26.1%</strong> Fine-tuning Improvement</span> • 
+                    <span class="metric"><strong>4/4</strong> Tasks Improved</span> • 
+                    <span class="metric"><strong>0.94</strong> Average Success Rate</span>
+                </div>
+
+                <!-- Key Findings -->
+                <div class="simple-findings">
+                    <h3>Key Findings</h3>
+                    <p class="findings-text">
+                        <strong>Representation Collapse:</strong> Identified diffusion representation collapse as the core problem. 
+                        <strong>Dispersive Loss:</strong> Early-layer regularization for simple tasks, late-layer for complex tasks. 
+                        <strong>SOTA Results:</strong> 94% average success rate with 22.7% pre-training and 26.1% fine-tuning improvements. 
+                        <strong>Real-World Validation:</strong> Successful deployment on Franka Panda robot across all benchmark tasks.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Citation -->
+        <section class="section">
+            <div class="content">
+                <h2>Citation</h2>
+                <div class="citation-box">
+                    <pre><code>@article{anonymous2026d2ppo,
+  title={D²PPO: Diffusion Policy Policy Optimization with Dispersive Loss},
+  author={Anonymous Submission},
+  conference={AAAI Conference on Artificial Intelligence},
+  year={2026}
+}</code></pre>
+                    <button class="copy-btn" onclick="copyToClipboard()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 D²PPO Project. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
