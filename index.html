@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D²PPO: Diffusion Policy Policy Optimization with Dispersive Loss</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">D²PPO</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#abstract" class="nav-link">Abstract</a></li>
+                <li class="nav-item"><a href="#method" class="nav-link">Method</a></li>
+                <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="#results" class="nav-link">Results</a></li>
+                <li class="nav-item"><a href="#simulation" class="nav-link">Simulation</a></li>
+                <li class="nav-item"><a href="#real-robot" class="nav-link">Real Robot</a></li>
+                <li class="nav-item"><a href="#citation" class="nav-link">Citation</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -33,21 +49,34 @@
                         <i class="fab fa-youtube"></i> YouTube
                     </a>
                 </div>
+
+                <!-- YouTube Video Showcase -->
+                <div class="video-showcase">
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/a4nR4IXNwQE"
+                            title="D²PPO Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Abstract -->
-        <section class="section">
+        <section class="section" id="abstract">
             <div class="content">
                 <h2>Abstract</h2>
                 <p class="abstract">
-                    Diffusion policies excel at robotic manipulation by naturally modeling multimodal action distributions in high-dimensional spaces. Nevertheless, diffusion policies suffer from <strong>diffusion representation collapse</strong>: semantically similar observations are mapped to indistinguishable features, ultimately impairing their ability to handle subtle but critical variations required for complex robotic manipulation. To address this problem, we propose <strong>D²PPO (Diffusion Policy Policy Optimization with Dispersive Loss)</strong>. D²PPO introduces dispersive loss regularization that combats representation collapse by treating all hidden representations within each batch as negative pairs. D²PPO compels the network to learn discriminative representations of similar observations, thereby enabling the policy to identify subtle yet crucial differences necessary for precise manipulation. On RoboMimic benchmarks, D²PPO achieves an average improvement of <strong>22.7%</strong> in pre-training and <strong>26.1%</strong> after fine-tuning, setting new SOTA results. Real-world experiments on Franka Emika Panda robot validate the practicality of our method.
+                    Diffusion policies excel at robotic manipulation by naturally modeling multimodal action distributions in high-dimensional spaces. Nevertheless, diffusion policies suffer from <strong>diffusion representation collapse</strong>: semantically similar observations are mapped to indistinguishable features, ultimately impairing their ability to handle subtle but critical variations required for complex robotic manipulation. To address this problem, we propose <strong>D²PPO (Diffusion Policy Policy Optimization with Dispersive Loss)</strong>. D²PPO introduces dispersive loss regularization that combats representation collapse by treating all hidden representations within each batch as negative pairs. D²PPO compels the network to learn discriminative representations of similar observations, thereby enabling the policy to identify subtle yet crucial differences necessary for precise manipulation. On RoboMimic benchmarks, D²PPO achieves an average improvement of <span class="highlight-metric">22.7%</span> in pre-training and <span class="highlight-metric">26.1%</span> after fine-tuning, setting new SOTA results. Real-world experiments on Franka Emika Panda robot validate the practicality of our method.
                 </p>
             </div>
         </section>
 
         <!-- Method Overview -->
-        <section class="section">
+        <section class="section" id="method">
             <div class="content">
                 <h2>Method Overview</h2>
                 <div class="method-overview-full">
@@ -75,7 +104,7 @@
         </section>
 
         <!-- Key Features -->
-        <section class="section">
+        <section class="section" id="features">
             <div class="content">
                 <h2>Key Features</h2>
                 <div class="features-grid-compact">
@@ -111,7 +140,7 @@
         </section>
 
         <!-- Pre-training Results -->
-        <section class="section">
+        <section class="section" id="results">
             <div class="content">
                 <!-- Main Results Figure -->
                 <div class="result-figure">
@@ -142,7 +171,7 @@
         </section>
 
         <!-- Simulation Results -->
-        <section class="section">
+        <section class="section" id="simulation">
             <div class="content">
                 <h2>Simulation Results</h2>
                 <div class="simulation-results">
@@ -202,7 +231,7 @@
         </section>
 
         <!-- Real Robot Experiments -->
-        <section class="section">
+        <section class="section" id="real-robot">
             <div class="content">
                 <h2>Real Robot Validation</h2>
                 <div class="real-robot-results">
@@ -282,19 +311,19 @@
                 
                 <!-- Key Metrics -->
                 <div class="simple-metrics">
-                    <span class="metric"><strong>+22.7%</strong> Pre-training Improvement</span> • 
-                    <span class="metric"><strong>+26.1%</strong> Fine-tuning Improvement</span> • 
-                    <span class="metric"><strong>4/4</strong> Tasks Improved</span> • 
-                    <span class="metric"><strong>0.94</strong> Average Success Rate</span>
+                    <span class="metric"><span class="highlight-metric">+22.7%</span> Pre-training Improvement</span> •
+                    <span class="metric"><span class="highlight-metric">+26.1%</span> Fine-tuning Improvement</span> •
+                    <span class="metric"><span class="highlight-metric">4/4</span> Tasks Improved</span> •
+                    <span class="metric"><span class="highlight-metric">0.94</span> Average Success Rate</span>
                 </div>
 
                 <!-- Key Findings -->
                 <div class="simple-findings">
                     <h3>Key Findings</h3>
                     <p class="findings-text">
-                        <strong>Representation Collapse:</strong> Identified diffusion representation collapse as the core problem. 
-                        <strong>Dispersive Loss:</strong> Early-layer regularization for simple tasks, late-layer for complex tasks. 
-                        <strong>SOTA Results:</strong> 94% average success rate with 22.7% pre-training and 26.1% fine-tuning improvements. 
+                        <strong>Representation Collapse:</strong> Identified diffusion representation collapse as the core problem.
+                        <strong>Dispersive Loss:</strong> Early-layer regularization for simple tasks, late-layer for complex tasks.
+                        <strong>SOTA Results:</strong> <span class="highlight-metric">94%</span> average success rate with <span class="highlight-metric">22.7%</span> pre-training and <span class="highlight-metric">26.1%</span> fine-tuning improvements.
                         <strong>Real-World Validation:</strong> Successful deployment on Franka Panda robot across all benchmark tasks.
                     </p>
                 </div>
@@ -302,7 +331,7 @@
         </section>
 
         <!-- Citation -->
-        <section class="section">
+        <section class="section" id="citation">
             <div class="content">
                 <h2>Citation</h2>
                 <div class="citation-box">
